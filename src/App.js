@@ -1,5 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 import "./App.css";
+import Photo from "./Photo";
+import Navigation from "./Navigation";
+import axios from "axios";
 
 function App() {
 
@@ -8,7 +11,7 @@ function App() {
     const [photoOfTheDay, setPhotoOfTheDay] = useState("");
 
   useEffect ( () => {
-    axios.get("https://api.nasa.gov/planetary/apod?api_key=Q6RD3lJAhyj5FK5PBQDjbzBnfmHtEtIbEcrCVWjS")
+    axios.get("https://api.nasa.gov/")
     .then (res => {
       setPhotoOfTheDay(res.data);
       setPhotoTitle(res.data);
@@ -19,9 +22,14 @@ function App() {
       setPhotoOfTheDay({
         copyright: "",
         title: "404 Photo Not Found",
-      })
+        explanation: "",
+        hdurl: "",
+        media_type: "",
+        service_version: "",
+        url: ""   
+      }), error
     })
-  })
+  }, [])
 
 
   return (
